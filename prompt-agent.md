@@ -1,34 +1,30 @@
 @openspec/project.md
 @openspec/AGENTS.md
-@openspec/changes/feature-2-range-module-class/proposal.md
-@openspec/changes/feature-2-range-module-class/design.md
-@openspec/changes/feature-2-range-module-class/tasks.md
-@openspec/changes/feature-2-range-module-class/delta.md
+@openspec/changes/feature-3-optimization-and-tests/proposal.md
+@openspec/changes/feature-3-optimization-and-tests/design.md
+@openspec/changes/feature-3-optimization-and-tests/tasks.md
 
-Implementa el código de la Feature 2: Range Module Class.
+
+Implementa el código de la Feature 3: Optimización y Tests.
 
 **Instrucciones:**
 
-1. Crea el archivo `src/range_module.py`.
+1. Crea el archivo `tests/test_range_module.py` con pruebas unitarias para `RangeModule`.
 
-2. La clase `RangeModule` debe:
-   - Tener un constructor `__init__()` que inicialice una instancia de `IntervalManager`.
-   - Implementar los métodos públicos:
-     - `addRange(left: int, right: int) -> None`
-     - `removeRange(left: int, right: int) -> None`
-     - `queryRange(left: int, right: int) -> bool`
+2. Las pruebas deben cubrir:
+   - `addRange`: intervalos simples, superpuestos, adyacentes.
+   - `removeRange`: eliminación parcial, total, sin superposición.
+   - `queryRange`: consultas exactas, parciales, fuera de rango.
+   - Casos edge: intervalos vacíos, `left >= right`.
 
-3. Cada método debe delegar en el `IntervalManager` correspondiente:
-   - `addRange` → `_interval_manager._add_interval(left, right)`
-   - `removeRange` → `_interval_manager._remove_interval(left, right)`
-   - `queryRange` → `_interval_manager._query_interval(left, right)`
+3. Usa `pytest` para las pruebas (asume que está instalado).
 
-4. Incluye type hints y docstrings en todos los métodos.
+4. Optimiza `queryRange` en `IntervalManager` si es necesario:
+   - Asegura que use `bisect` para búsqueda eficiente.
+   - Si ya está optimizado, no lo modifiques.
 
-5. No modifiques `src/interval_manager.py` (ya existe de la Feature 1).
+5. Incluye type hints y docstrings en los tests.
 
 **Restricciones:**
-- Usa la instancia de `IntervalManager` como atributo privado (`_interval_manager`).
-- No agregues lógica adicional en `RangeModule` (solo delegación).
-- Sigue el estilo de codificación de Python (PEP 8).
-- No generes tests.
+- No modifiques `src/interval_manager.py` o `src/range_module.py` a menos que sea estrictamente necesario.
+- Los tests deben ser independientes y no depender del orden de ejecución.
